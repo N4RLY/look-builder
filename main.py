@@ -8,7 +8,7 @@ sys.path.append(str(Path(__file__).parent))
 
 # Import screens
 from screens import input_preferences, suggested_items, loading, suggested_look
-from screens import clarify_feedback, final_look, feedback
+from screens import clarify_feedback, final_look, feedback, suggested_outfits
 
 # Import utilities
 from utils.session_state import SessionState
@@ -54,6 +54,8 @@ def main():
         suggested_items.render()
     elif st.session_state.current_screen == "loading":
         loading.render()
+    elif st.session_state.current_screen == "suggested_outfits":
+        suggested_outfits.render()
     elif st.session_state.current_screen == "suggested_look":
         suggested_look.render()
     elif st.session_state.current_screen == "clarify_feedback":
