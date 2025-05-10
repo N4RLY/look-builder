@@ -3,14 +3,14 @@ from utils.session_state import SessionState
 
 def render():
     """Render the Final Look screen"""
-    st.header("Screen 5: Final Look")
+    st.header("Final Look")
     
     if st.session_state.outfit is None:
         st.error("No outfit recommendation found. Please start over.")
         if st.button("Start Over"):
             SessionState.reset()
             SessionState.navigate_to("input_preferences")
-            st.experimental_rerun()
+            st.rerun()
         return
     
     with st.container():
@@ -53,4 +53,4 @@ def render():
             # Reset and start over
             SessionState.reset()
             SessionState.navigate_to("input_preferences")
-            st.experimental_rerun() 
+            st.rerun() 

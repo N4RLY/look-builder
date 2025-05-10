@@ -11,7 +11,7 @@ def render(embedder: SimpleEmbedder):
     st.write("Tell us what exactly didn't work — I'll find a better one right away!")
     
     # Text area for detailed feedback
-    feedback = st.text_area("", placeholder="Please provide specific feedback...")
+    feedback = st.text_area("Clarify Feedback", placeholder="Please provide specific feedback...", label_visibility="collapsed")
     
     # Regenerate outfit button
     if st.button("Regenerate Outfit", use_container_width=True):
@@ -35,7 +35,7 @@ def render(embedder: SimpleEmbedder):
         
         # Navigate to suggested look
         SessionState.navigate_to("suggested_look")
-        st.experimental_rerun()
+        st.rerun()
     
     # Start over button
     if st.button("Start over", use_container_width=True):
@@ -43,4 +43,4 @@ def render(embedder: SimpleEmbedder):
         # Reset the session and go back to input preferences
         SessionState.reset()
         SessionState.navigate_to("input_preferences")
-        st.experimental_rerun() 
+        st.rerun() 

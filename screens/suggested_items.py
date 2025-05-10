@@ -5,7 +5,7 @@ import time
 
 def render(embedder: SimpleEmbedder):
     """Render the Suggested Items screen"""
-    st.header("Screen 2: List of Suggested Items")
+    st.header("Suggested Items")
     
     with st.container():
         st.subheader("Please select the item that best matches yours:")
@@ -33,7 +33,7 @@ def render(embedder: SimpleEmbedder):
                     
                     # Navigate to suggested look screen
                     SessionState.navigate_to("suggested_look")
-                    st.experimental_rerun()
+                    st.rerun()
             
             # Add a separator between items
             st.divider()
@@ -43,15 +43,15 @@ def render(embedder: SimpleEmbedder):
             if st.session_state.selected_item is not None:
                 # If an item was selected, navigate to loading
                 SessionState.navigate_to("loading")
-                st.experimental_rerun()
+                st.rerun()
             else:
                 # If no item was selected, show error
                 st.error("Please select an item first")
                 time.sleep(2)
-                st.experimental_rerun()
+                st.rerun()
                 
         # Show more options button (not implemented in MVP)
         if st.button("See more options"):
             st.info("This feature will be available in a future update")
             time.sleep(2)
-            st.experimental_rerun() 
+            st.rerun() 

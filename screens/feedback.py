@@ -9,7 +9,7 @@ def render():
     st.write("Please leave your feedback:")
     
     # Text area for feedback
-    feedback = st.text_area("", placeholder="Your feedback helps us improve...")
+    feedback = st.text_area("Feedback", placeholder="Your feedback helps us improve...", label_visibility="collapsed")
     
     # Submit button
     if st.button("Submit", use_container_width=True):
@@ -22,10 +22,10 @@ def render():
             
         # Navigate back to final look
         SessionState.navigate_to("final_look")
-        st.experimental_rerun()
+        st.rerun()
     
     # Skip button
     if st.button("Skip", use_container_width=True):
         # Navigate back to final look
         SessionState.navigate_to("final_look")
-        st.experimental_rerun() 
+        st.rerun() 

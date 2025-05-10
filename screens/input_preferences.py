@@ -5,7 +5,7 @@ import time
 
 def render(embedder: SimpleEmbedder):
     """Render the Input Preferences screen"""
-    st.header("Screen 1: Input Preferences")
+    st.header("Input Preferences")
     
     with st.container():
         st.subheader("Select your item's parameters:")
@@ -56,10 +56,10 @@ def render(embedder: SimpleEmbedder):
             
             if similar_items:
                 SessionState.set_suggested_items(similar_items)
-                
-                # Navigate to list of suggested items
-                SessionState.navigate_to("suggested_items")
+                # Navigate to loading screen and rerun
+                SessionState.navigate_to("loading")
+                st.rerun()
             else:
                 st.error("No matching items found. Please try different parameters.")
                 time.sleep(2)
-                st.experimental_rerun() 
+                st.rerun() 

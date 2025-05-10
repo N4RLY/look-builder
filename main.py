@@ -73,7 +73,7 @@ def main():
     else:
         # Default to input preferences if there's an issue
         SessionState.navigate_to("input_preferences")
-        st.experimental_rerun()
+        st.rerun()
 
 if __name__ == "__main__":
     main()
