@@ -12,7 +12,6 @@ from screens import clarify_feedback, final_look, feedback
 
 # Import utilities
 from utils.session_state import SessionState
-from utils.simple_embedder import SimpleEmbedder
 
 def main():
     """Main function to run the Streamlit app"""
@@ -26,13 +25,6 @@ def main():
     
     # Initialize session state
     SessionState.initialize_session()
-    
-    # Create embedder instance
-    embedder = SimpleEmbedder()
-    
-    # Load clothing data
-    data_path = os.path.join(Path(__file__).parent, "data", "clothing_items.json")
-    embedder.load_clothing_data(data_path)
     
     # Custom CSS
     st.markdown("""
@@ -57,15 +49,15 @@ def main():
     
     # Display the appropriate screen based on session state
     if st.session_state.current_screen == "input_preferences":
-        input_preferences.render(embedder)
+        input_preferences.render()
     elif st.session_state.current_screen == "suggested_items":
-        suggested_items.render(embedder)
+        suggested_items.render()
     elif st.session_state.current_screen == "loading":
         loading.render()
     elif st.session_state.current_screen == "suggested_look":
         suggested_look.render()
     elif st.session_state.current_screen == "clarify_feedback":
-        clarify_feedback.render(embedder)
+        clarify_feedback.render()
     elif st.session_state.current_screen == "final_look":
         final_look.render()
     elif st.session_state.current_screen == "feedback":

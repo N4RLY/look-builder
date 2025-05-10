@@ -23,18 +23,18 @@ def render():
         # Create a box for the outfit details
         with st.container():
             st.write("### Why this look:")
-            st.write(f"You selected a **{base_item['color']} {base_item['material']} {base_item['type']}** — a perfect base for an elegant and versatile office style.")
+            st.write(f"You selected a **{base_item['color']} {base_item['material']} {base_item['item_type']}** — a perfect base for an elegant and versatile office style.")
             
             st.write("**Recommended outfit:**")
             
             # List each recommended item with bullets
             for item in recommended_items:
-                if "pants" in item["type"]:
-                    st.write(f"• **Trousers:** {item['color']} {item['material']} {item['name'].split()[0]}")
-                elif "shoes" in item["type"]:
-                    st.write(f"• **Shoes:** {item['color']} {item['material']} {item['name'].split()[0]}")
-                elif "accessories" in item["type"]:
-                    st.write(f"• **Accessories:** {item['description']}")
+                if "pants" in item["item_type"]:
+                    st.write(f"• **Trousers:** {item['color']} {item['material']}")
+                elif "shoes" in item["item_type"]:
+                    st.write(f"• **Shoes:** {item['color']} {item['material']}")
+                elif "accessories" in item["item_type"]:
+                    st.write(f"• **Accessories:** {item.get('description', '')}")
             
             # Add optional jacket if available
             st.write("• **Optional jacket:** Lightweight wool blazer in a neutral color (grey or dark blue)")
@@ -42,7 +42,7 @@ def render():
             # Add style and usage context
             st.write(f"**Look style:** {base_item['style']}")
             st.write("**Usage context:**")
-            st.write(f"{base_item['usage_context']}")
+            st.write(f"{base_item.get('usage_context', 'No specific usage context provided.')}")
         
         # Thank you message
         st.write("Thank you for trusting me with your style!")
