@@ -3,14 +3,14 @@ from utils.session_state import SessionState
 
 def render():
     """Render the Suggested Look screen"""
-    st.header("Screen 4: Suggested Look")
+    st.header("Suggested Look")
     
     if st.session_state.outfit is None:
         st.error("No outfit recommendation found. Please start over.")
         if st.button("Start Over"):
             SessionState.reset()
             SessionState.navigate_to("input_preferences")
-            st.experimental_rerun()
+            st.rerun()
         return
     
     with st.container():
@@ -51,13 +51,13 @@ def render():
             if st.button("👍 I like it"):
                 # Store positive feedback
                 SessionState.set_feedback(liked=True)
-                # Navigate to final look
-                SessionState.navigate_to("final_look")
-                st.experimental_rerun()
+                # Navigate to feedback screen (not final look)
+                SessionState.navigate_to("feedback")
+                st.rerun()
                 
         with col2:
             if st.button("👎 I don't like it, show me other options"):
                 # Navigate to clarify feedback
                 SessionState.set_feedback(liked=False)
                 SessionState.navigate_to("clarify_feedback")
-                st.experimental_rerun() 
+                st.rerun() 
