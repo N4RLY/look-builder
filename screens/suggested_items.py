@@ -10,14 +10,23 @@ def render():
     # Get user preferences from session state
     preferences = st.session_state.user_preferences
 
-    # Find best matches using the scalable embedder
-    suggested = SessionState.find_best_matches(preferences, clothing_items, top_k=3)
-    st.session_state.suggested_items = suggested
+    # Use a large top_k to get all possible matches
+    all_suggested = SessionState.find_best_matches(preferences, clothing_items, top_k=12)
+    st.session_state.suggested_items_all = all_suggested
+
+    # Track pagination index in session state
+    if 'suggested_items_index' not in st.session_state:
+        st.session_state.suggested_items_index = 0
+    page_size = 3
+    start = st.session_state.suggested_items_index
+    end = start + page_size
+    current_batch = all_suggested[start:end]
+    total = len(all_suggested)
 
     with st.container():
         st.subheader("Please select the item that best matches your preferences:")
 
-        for item in st.session_state.suggested_items:
+        for item in current_batch:
             with st.container():
                 st.write(f"**Type:** {item['item_type']}")
                 st.write(f"Color: {item['color']}, Material: {item['material']}, Gender: {item['gender']}, Style: {item['style']}")
@@ -31,16 +40,21 @@ def render():
 
             st.divider()
 
-        if st.button("Done"):
-            if st.session_state.selected_item is not None:
-                SessionState.navigate_to("loading")
-                st.rerun()
+        # Pagination controls
+        col1, col2, col3 = st.columns([1,2,1])
+        with col1:
+            if st.session_state.suggested_items_index > 0:
+                if st.button("Back"):
+                    st.session_state.suggested_items_index = max(0, st.session_state.suggested_items_index - page_size)
+                    st.rerun()
             else:
-                st.error("Please select an item first")
-                time.sleep(2)
-                st.rerun()
-
-        if st.button("See more options"):
-            st.info("This feature will be available in a future update")
-            time.sleep(2)
-            st.rerun() 
+                st.write("")
+        with col2:
+            st.markdown(f"<div style='text-align:center; font-size:0.95rem;'>Page {start//page_size+1} of {((total-1)//page_size)+1}</div>", unsafe_allow_html=True)
+        with col3:
+            if end < total:
+                if st.button("See more options"):
+                    st.session_state.suggested_items_index += page_size
+                    st.rerun()
+            else:
+                st.write("") 
