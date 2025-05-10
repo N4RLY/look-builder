@@ -3,6 +3,19 @@ from utils.session_state import SessionState
 from utils.mock_data import clothing_items
 import time
 
+def filter_items_by_preferences(items, preferences):
+    """Filter items by non-empty user preferences (exact match)."""
+    filtered = []
+    for item in items:
+        match = True
+        for key, value in preferences.items():
+            if value and item.get(key) != value:
+                match = False
+                break
+        if match:
+            filtered.append(item)
+    return filtered
+
 def render():
     """Render the Suggested Items screen using the custom embedder and mock dataset"""
     st.header("Suggested Items")
@@ -10,8 +23,8 @@ def render():
     # Get user preferences from session state
     preferences = st.session_state.user_preferences
 
-    # Use a large top_k to get all possible matches
-    all_suggested = SessionState.find_best_matches(preferences, clothing_items, top_k=12)
+    # Use attribute-based filtering for core item selection
+    all_suggested = filter_items_by_preferences(clothing_items, preferences)
     st.session_state.suggested_items_all = all_suggested
 
     # Track pagination index in session state
@@ -35,7 +48,7 @@ def render():
                     SessionState.select_item(item)
                     SessionState.navigate_to("loading")
                     time.sleep(1)
-                    SessionState.navigate_to("suggested_look")
+                    SessionState.navigate_to("suggested_outfits")
                     st.rerun()
 
             st.divider()
