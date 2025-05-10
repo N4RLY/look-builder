@@ -4,7 +4,7 @@ This is a project for S25-HAIID course at Innopolis University
 
 ## Description
 
-Look Builder is a fashion styling assistant that helps users create stylish outfits based on their preferences. The application uses natural language processing and similarity matching to recommend clothing items and complete outfits.
+Look Builder is a fashion styling assistant that helps users create stylish outfits based on their preferences. The application uses similarity matching to recommend clothing items and complete outfits.
 
 ## Features
 
@@ -17,8 +17,8 @@ Look Builder is a fashion styling assistant that helps users create stylish outf
 ## Technologies Used
 
 - Streamlit for the user interface
-- Sentence-Transformers for text embeddings and similarity matching
 - Python 3.8+
+- scikit-learn for similarity matching
 
 ## Installation
 
@@ -47,8 +47,9 @@ Look Builder is a fashion styling assistant that helps users create stylish outf
 ## Project Structure
 
 - `main.py`: Main application file
-- `data/`: Contains clothing item data
-- `utils/`: Utility functions for embeddings and session state
+- `utils/`: 
+  - `session_state.py`: Manages application state and contains recommendation algorithms
+  - `mock_data.py`: Contains clothing item data
 - `screens/`: Different screens/views of the application
 
 ## Contributing
