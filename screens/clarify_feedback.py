@@ -18,21 +18,15 @@ def render():
         # Store the feedback
         SessionState.set_feedback(liked=False, feedback_text=feedback)
         
-        # Navigate to loading screen
-        SessionState.navigate_to("loading")
-        
-        # Generate a new outfit based on the base item
+        # Generate a new outfit based on the base item (we'll do this in the loading screen instead)
         base_item = st.session_state.outfit["base_item"]
         new_outfit = SessionState.recommend_outfit(base_item, clothing_items, outfits)
         
         # Replace old outfit with new one
         SessionState.set_outfit(new_outfit)
         
-        # Brief pause for loading screen
-        time.sleep(2)
-        
-        # Navigate back to suggested outfits with the context
-        SessionState.navigate_to("suggested_outfits")
+        # Navigate to outfit loading screen
+        SessionState.navigate_to("outfit_loading")
         st.rerun()
     
     # Start over button

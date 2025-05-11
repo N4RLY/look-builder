@@ -1,9 +1,10 @@
 import streamlit as st
 from utils.session_state import SessionState
+from utils.mock_data import clothing_items, outfits
 import time
 
 def render():
-    """Render the Loading screen with a mock delay, then go to suggested_items."""
+    """Render the Outfit Loading screen with a delay, then go to suggested_outfits."""
     # Clear the entire screen first by setting a fullscreen container
     st.markdown("""
         <style>
@@ -23,8 +24,8 @@ def render():
         }
         </style>
         <div class="fullscreen-container">
-            <h2 style="color: white; margin-bottom: 20px;">Finding Items For You</h2>
-            <div style="color: #4CAF50; font-size: 16px;">Searching for the perfect items that match your style...</div>
+            <h2 style="color: white; margin-bottom: 20px;">Creating Your Outfit Options</h2>
+            <div style="color: #4CAF50; font-size: 16px;">Finding the perfect outfit combinations...</div>
         </div>
     """, unsafe_allow_html=True)
     
@@ -37,12 +38,18 @@ def render():
         </style>
     """, unsafe_allow_html=True)
     
+    # Perform necessary operations without showing UI elements
+    if 'outfit_options' in st.session_state:
+        del st.session_state.outfit_options
+        
     # Loading delay
     time.sleep(2.5)
     
-    # After loading, go to suggested_items
-    SessionState.navigate_to("suggested_items")
-    st.rerun()
-        
-    # The actual navigation happens in the suggested_items.py when the button is clicked
-    # This is just a visual screen that will be shown briefly 
+    # Make sure there's a selected item before proceeding
+    if st.session_state.selected_item is None:
+        SessionState.navigate_to("suggested_items")
+        st.rerun()
+    
+    # Navigate to suggested outfits after loading is complete
+    SessionState.navigate_to("suggested_outfits")
+    st.rerun() 

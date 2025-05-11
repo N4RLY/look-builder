@@ -60,32 +60,42 @@ def generate_alternative_outfits(selected_item, items, outfits_data, max_outfits
 
 def render():
     """Render the Suggested Outfits screen - shows multiple outfit options for the selected item."""
+    # Check if we need to generate outfit options
+    if 'outfit_options' not in st.session_state:
+        # First time displaying this screen - outfit options should be generated in outfit_loading screen
+        selected_item = st.session_state.selected_item
+        if selected_item is None:
+            st.error("No item selected. Please go back and select an item first.")
+            if st.button("Go Back"):
+                SessionState.navigate_to("suggested_items")
+                st.rerun()
+            return
+            
+        # Generate multiple outfit options
+        outfit_options = generate_alternative_outfits(selected_item, clothing_items, outfits, max_outfits=3)
+        st.session_state.outfit_options = outfit_options
+        
+        # If no options found, navigate to feedback with a basic outfit
+        if not outfit_options:
+            st.warning("No outfit options found for this item. Let's try our recommendation system.")
+            outfit = SessionState.recommend_outfit(selected_item, clothing_items, outfits)
+            SessionState.set_outfit(outfit)
+            SessionState.set_feedback(liked=True)
+            SessionState.navigate_to("feedback")
+            st.rerun()
+
+    # Display the content
     st.header("Choose Your Outfit")
     
     # Get the selected item from session state
     selected_item = st.session_state.selected_item
-    if selected_item is None:
-        st.error("No item selected. Please go back and select an item first.")
-        if st.button("Go Back"):
-            SessionState.navigate_to("suggested_items")
-            st.rerun()
-        return
     
     # Display the selected item
     st.subheader("Your Selected Item")
     st.write(f"**{selected_item['item_type']}** — {selected_item['color']}, {selected_item['material']}, {selected_item['gender']}, {selected_item['style']}")
     
-    # Generate multiple outfit options
-    outfit_options = generate_alternative_outfits(selected_item, clothing_items, outfits, max_outfits=3)
-    
-    if not outfit_options:
-        st.warning("No outfit options found for this item. Let's try our recommendation system.")
-        # Use the base recommendation system directly
-        outfit = SessionState.recommend_outfit(selected_item, clothing_items, outfits)
-        SessionState.set_outfit(outfit)
-        SessionState.set_feedback(liked=True)
-        SessionState.navigate_to("feedback")
-        st.rerun()
+    # Get outfit options from session state
+    outfit_options = st.session_state.outfit_options
     
     # Show the outfit options
     st.subheader("Choose an outfit option:")
@@ -109,6 +119,9 @@ def render():
                 }
                 SessionState.set_outfit(outfit_dict)
                 SessionState.set_feedback(liked=True)
+                # Clear outfit options from session state when moving to next screen
+                if 'outfit_options' in st.session_state:
+                    del st.session_state.outfit_options
                 SessionState.navigate_to("feedback")
                 st.rerun()
             
@@ -119,6 +132,9 @@ def render():
     
     with col1:
         if st.button("Go Back to Item Selection"):
+            # Clear outfit options when going back
+            if 'outfit_options' in st.session_state:
+                del st.session_state.outfit_options
             SessionState.navigate_to("suggested_items")
             st.rerun()
     
@@ -135,6 +151,10 @@ def render():
                 outfit = SessionState.recommend_outfit(selected_item, clothing_items, outfits)
                 SessionState.set_outfit(outfit)
             
+            # Clear outfit options when adding context
+            if 'outfit_options' in st.session_state:
+                del st.session_state.outfit_options
+                
             # Navigate to clarify feedback to add more context
             SessionState.navigate_to("clarify_feedback")
             st.rerun() 

@@ -25,7 +25,7 @@ def render():
             st.write("### Why this look:")
             st.write(f"You selected a **{base_item['color']} {base_item['material']} {base_item['item_type']}** — a perfect base for an elegant and versatile office style.")
             
-            st.write("**Recommended outfit:**")
+            st.write("### Recommended outfit:")
             
             # List each recommended item with bullets
             for item in recommended_items:
@@ -40,9 +40,8 @@ def render():
             st.write("• **Optional jacket:** Lightweight wool blazer in a neutral color (grey or dark blue)")
             
             # Add style and usage context
-            st.write(f"**Look style:** {base_item['style']}")
-            st.write("**Usage context:**")
-            st.write(f"{base_item.get('usage_context', 'No specific usage context provided.')}")
+            st.write(f"### Look style: {base_item['style']}")
+            st.write(f"### Usage context: {base_item.get('usage_context', 'No specific usage context provided.')}")
         
         # Thank you message
         st.write("Thank you for trusting me with your style!")

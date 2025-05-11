@@ -45,29 +45,33 @@ def render():
                 st.write(f"Color: {item['color']}, Material: {item['material']}, Gender: {item['gender']}, Style: {item['style']}")
 
                 if st.button(f"Select", key=f"select_{item['id']}"):
+                    # Select the item
                     SessionState.select_item(item)
-                    SessionState.navigate_to("loading")
-                    time.sleep(1)
-                    SessionState.navigate_to("suggested_outfits")
+                    
+                    # Navigate to outfit loading screen first
+                    SessionState.navigate_to("outfit_loading")
                     st.rerun()
 
             st.divider()
 
-        # Pagination controls
-        col1, col2, col3 = st.columns([1,2,1])
-        with col1:
-            if st.session_state.suggested_items_index > 0:
-                if st.button("Back"):
-                    st.session_state.suggested_items_index = max(0, st.session_state.suggested_items_index - page_size)
-                    st.rerun()
-            else:
-                st.write("")
-        with col2:
-            st.markdown(f"<div style='text-align:center; font-size:0.95rem;'>Page {start//page_size+1} of {((total-1)//page_size)+1}</div>", unsafe_allow_html=True)
-        with col3:
-            if end < total:
-                if st.button("See more options"):
-                    st.session_state.suggested_items_index += page_size
-                    st.rerun()
-            else:
-                st.write("") 
+    # Pagination controls in a row
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col1:
+        back_disabled = st.session_state.suggested_items_index == 0
+        if st.button("Back", disabled=back_disabled):
+            st.session_state.suggested_items_index = max(0, st.session_state.suggested_items_index - page_size)
+            st.rerun()
+    with col2:
+        st.markdown(f"<div style='text-align:center; font-size:0.95rem; padding-top:0.5rem;'>Page {start//page_size+1} of {((total-1)//page_size)+1}</div>", unsafe_allow_html=True)
+    with col3:
+        next_disabled = end >= total
+        if st.button("See more options", disabled=next_disabled):
+            st.session_state.suggested_items_index += page_size
+            st.rerun()
+    
+    # Add a centered button below the pagination for going back to input preferences
+    _, center_col, _ = st.columns([1, 2, 1])
+    with center_col:
+        if st.button("Go back to input preferences", use_container_width=True):
+            SessionState.navigate_to("input_preferences")
+            st.rerun() 
