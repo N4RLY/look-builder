@@ -127,13 +127,103 @@ Several features and improvements are planned for future updates:
 
 ---
 
-## 7. Conclusion
+## 7. Design Patterns
+
+The Look Builder system implements several established Human-AI Interaction Design patterns to ensure a user-friendly, effective, and trustworthy experience.
+
+### Value Assessment
+- **Pattern 1: Determine if AI adds value**
+  - The system solves the problem of choosing complementary clothing items to create cohesive outfits
+  - Creates value by saving time, offering fashion expertise, and helping users create stylish outfits without needing a human stylist
+
+### Explanation Patterns
+- **Pattern 2: Set the right expectations**
+  - The system offers outfit suggestions rather than claiming to provide "perfect" outfits
+  - Retry functionality acknowledges that initial recommendations may not always satisfy user needs
+  
+- **Pattern 3: Explain the benefit, not the technology**
+  - Focus is on helping users create stylish outfits for specific contexts
+  - User interactions center on style outcomes rather than showcasing underlying technology
+  
+- **Pattern 10: Explain for understanding**
+  - Outfit descriptions focus on styling information with clear explanations of why items work together
+  - Explanations prioritize style rationale over technical algorithm details
+
+### Errors & Feedback
+- **Pattern 4: Be accountable for errors**
+  - System acknowledges potential mismatches by offering retry functionality
+  - User feedback mechanisms allow for error reporting and continuous improvement
+  
+- **Pattern 6: Handle precision/recall trade-offs**
+  - Optimized for precision in clothing classification to ensure accurate style matching
+  - Prioritizes confident identification of fewer clothing types correctly over potential misclassifications
+  
+- **Pattern 12: Let users give feedback**
+  - Users can provide good/bad ratings and add text clarifications
+  - System incorporates feedback for improved suggestions and allows for retries
+
+### Privacy Considerations
+- **Pattern 7: Be transparent about privacy**
+  - System explains how user preferences are stored and used
+  - *Future improvement:* Add clearer explanations of data usage policies
+  
+- **Pattern 8: Make it safe to explore**
+  - *Future improvement:* Implement a demo mode with sample outfit suggestions before requiring user preferences
+
+### Confidence & Automation
+- **Pattern 9: Determine how to show model confidence**
+  - *Future improvement:* Include qualitative confidence indicators like "classic combination" vs. "experimental pairing"
+  
+- **Pattern 11: Automate according to risk**
+  - System automates outfit suggestions while keeping humans in the decision loop
+  - Low-risk nature of fashion recommendations allows for automated initial suggestions
+  
+- **Pattern 13: Let users supervise automation**
+  - Users supervise the process by adding context (e.g., "going to theater")
+  - Feedback mechanisms and retry options ensure users maintain control
+
+### Data Patterns
+- **Pattern 5: Invest early in good data practices**
+  - System requires high-quality clothing item data for proper classification
+  - *Improvement area:* Expand dataset to include more diverse clothing items
+  
+- **Pattern 14: Actively maintain your datasets**
+  - *Future improvement:* Implement regular updates to stay current with evolving fashion trends
+  - Use user feedback to continuously improve and refine the dataset
+  
+- **Pattern 15: Embrace noisy data**
+  - System designed to handle varied user inputs and sometimes contradictory feedback
+  - *Improvement area:* Enhance ability to interpret diverse contextual descriptions
+
+### Implementation Challenges
+The Look Builder system addresses several inherent challenges:
+
+- **Context understanding:** Interpreting subjective terms like "formal" or "casual" that vary culturally
+- **Personalization:** Balancing general style advice with individual preferences 
+- **Subjective feedback:** Converting qualitative user comments into actionable improvements
+- **Explainability:** Providing useful styling rationale without overwhelming users
+
+### Pattern Prioritization
+Based on the fashion styling assistant's needs, the following patterns were prioritized:
+
+1. **Determine if AI adds value:** Ensuring genuine utility beyond manual outfit creation
+2. **Let users supervise automation:** Giving users control over subjective fashion decisions
+3. **Let users give feedback:** Enabling continuous improvement through user input
+4. **Embrace noisy data:** Handling variable user inputs and clothing descriptions
+5. **Set the right expectations:** Clarifying that suggestions are recommendations, not perfect solutions
+6. **Explain the benefit:** Helping users understand why specific items were suggested
+7. **Invest in good data practices:** Ensuring accurate clothing classification
+8. **Automate according to risk:** Keeping humans in the loop while providing initial suggestions
+
+---
+
+## 8. Conclusion
 
 The current implementation provides a functional styling assistant with similarity-based recommendations and a multi-step user experience. The next major steps are to build a custom outfit embedder using real outfit data and to leverage LLMs for smarter feedback handling and recommendation refinement.
 
 ---
 
-## 8. References
+## 9. References
 
 [1] Song, B., Zhu, Q., & Luo, J. (2024). Human-AI collaboration by design. Proceedings of the Design Society, 4, 2247-2256. https://doi.org/10.1017/pds.2024.227
 
