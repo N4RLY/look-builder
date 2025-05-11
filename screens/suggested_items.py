@@ -27,6 +27,14 @@ def render():
     all_suggested = filter_items_by_preferences(clothing_items, preferences)
     st.session_state.suggested_items_all = all_suggested
 
+    # Check if no items were found
+    if not all_suggested:
+        st.warning("No items match your preferences. Please try adjusting your criteria.")
+        if st.button("Go back to input preferences", use_container_width=True):
+            SessionState.navigate_to("input_preferences")
+            st.rerun()
+        return
+
     # Track pagination index in session state
     if 'suggested_items_index' not in st.session_state:
         st.session_state.suggested_items_index = 0
