@@ -70,6 +70,77 @@ Several features and improvements are planned for future updates:
 
 ---
 
-## 5. Conclusion
+## 6. Human-AI Interaction Design
+
+### System Classification [1]
+- **Initiation Spectrum**: Human-as-prompter model where users initiate interactions by specifying preferences and contexts
+- **Intelligence Scope**: Performs both analysis (clothing classification) and synthesis (outfit recommendations)
+- **Cognitive Mode**: Combines rational analysis (matching style categories) with interpretive understanding (contextual appropriateness)
+
+### HAID Design Principles [2]
+- **AI Capabilities**:
+  - Recognition: Classifies clothing items based on user descriptions
+  - Reasoning: Applies style matching logic to create cohesive outfits
+  - Generation: Creates complete outfit recommendations adapted to context
+
+- **Interactive Attributes**:
+  - Directability: Users guide the system through preferences and contextual specifications
+  - Adaptability: System incorporates feedback to improve recommendations
+  - Transparency: Explanations provided for why items were selected together
+
+- **Trust Enablers**:
+  - Clear explanations for styling choices in the final look screen
+  - Feedback collection to demonstrate user input is valued
+  - Confidence signals about style combinations
+
+### Human-AI Collaboration
+- **Collective Goals**: Combine human preference with AI style analysis to create contextually appropriate outfits
+- **Task Allocation**:
+  - Human: Providing preferences, specifying contexts, evaluating recommendations
+  - AI: Style analysis, outfit generation, incorporating feedback
+
+- **Interaction Flow**:
+  1. User inputs initial preferences
+  2. System suggests matching items
+  3. User selects preferred item
+  4. System generates complete outfit
+  5. User provides context refinement
+  6. System adjusts recommendations iteratively
+  7. User offers feedback
+
+### Addressing Design Challenges
+- **Capability Uncertainty**: Implemented continuous feedback loop to improve system performance across diverse user contexts
+- **Output Complexity**: 
+  - Context-aware recommendations to ensure appropriate outfit suggestions
+  - Clear explanations for why items work together
+  
+### User Explainability Features
+- **Why This Outfit**: Explanations for why specific items complement each other
+- **Performance Understanding**: Clear communication of system capabilities and limitations
+- **What-If Scenarios**: Support for context changes to see how recommendations adapt
+
+### Evaluation Metrics
+- **Objective Fulfillment Rate**: Percentage of accepted outfit recommendations
+- **Feedback Impact**: Improvement in recommendations after user feedback
+- **Adaptability**: System's ability to adjust based on contextual inputs
+- **Trust Development**: User-reported trust ratings after multiple interactions
+
+---
+
+## 7. Conclusion
 
 The current implementation provides a functional styling assistant with similarity-based recommendations and a multi-step user experience. The next major steps are to build a custom outfit embedder using real outfit data and to leverage LLMs for smarter feedback handling and recommendation refinement.
+
+---
+
+## 8. References
+
+[1] Song, B., Zhu, Q., & Luo, J. (2024). Human-AI collaboration by design. Proceedings of the Design Society, 4, 2247-2256. https://doi.org/10.1017/pds.2024.227
+
+[2] Zhu, Q., Luo, J., Song, B., & Wang, X. (2024). HAIC Design Principles. arXiv preprint. https://arxiv.org/html/2407.19098v1
+
+[3] Yang, Q., Steinfeld, A., Rosé, C., & Zimmerman, J. (2020). Re-examining Whether, Why, and How Human-AI Interaction Is Uniquely Difficult to Design. Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems, 1-13. https://dl.acm.org/doi/pdf/10.1145/3313831.3376301
+
+[4] Yang, Q., Steinfeld, A., & Zimmerman, J. (2021). Unremarkable AI: Fitting Intelligent Decision Support into Critical, Clinical Decision-Making Processes. arXiv preprint. https://arxiv.org/pdf/2110.10790
+
+[5] Qin, M., & Wang, Z. (2024). Towards a Comprehensive Understanding of the Cognitive Psychology and Human-AI Interaction Design in Chatbot Creativity Support. Frontiers in Artificial Intelligence, 7. https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2024.1456486/full
