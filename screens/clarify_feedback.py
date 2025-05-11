@@ -5,16 +5,16 @@ import time
 
 def render():
     """Render the Clarify Feedback screen"""
-    st.header("Clarify Feedback")
+    st.header("Add More Context")
     
-    st.write("Sorry the outfit didn't match your style.")
-    st.write("Tell us what exactly didn't work — I'll find a better one right away!")
+    st.write("Help us understand your style preferences better.")
+    st.write("What specific details should we consider for your outfit?")
     
     # Text area for detailed feedback
-    feedback = st.text_area("Clarify Feedback", placeholder="Please provide specific feedback...", label_visibility="collapsed")
+    feedback = st.text_area("Additional Context", placeholder="Tell us about your style preferences, event, or specific needs...", label_visibility="collapsed")
     
     # Regenerate outfit button
-    if st.button("Regenerate Outfit", use_container_width=True):
+    if st.button("Generate Outfit", use_container_width=True):
         # Store the feedback
         SessionState.set_feedback(liked=False, feedback_text=feedback)
         
@@ -31,8 +31,8 @@ def render():
         # Brief pause for loading screen
         time.sleep(2)
         
-        # Navigate to suggested look
-        SessionState.navigate_to("suggested_look")
+        # Navigate back to suggested outfits with the context
+        SessionState.navigate_to("suggested_outfits")
         st.rerun()
     
     # Start over button

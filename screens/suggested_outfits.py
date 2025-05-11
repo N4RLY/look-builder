@@ -83,7 +83,8 @@ def render():
         # Use the base recommendation system directly
         outfit = SessionState.recommend_outfit(selected_item, clothing_items, outfits)
         SessionState.set_outfit(outfit)
-        SessionState.navigate_to("suggested_look")
+        SessionState.set_feedback(liked=True)
+        SessionState.navigate_to("feedback")
         st.rerun()
     
     # Show the outfit options
@@ -99,20 +100,41 @@ def render():
                 else:
                     st.write(f"• {item['item_type']} — {item['color']}, {item['material']}, {item['gender']}, {item['style']}")
             
-            # Button to select this outfit
-            if st.button(f"Choose Outfit {i+1}", key=f"choose_outfit_{i}"):
+            # Simple select button for each outfit
+            if st.button(f"Select Outfit {i+1}", key=f"select_outfit_{i}"):
                 # Create the outfit dictionary in the expected format
                 outfit_dict = {
                     "base_item": selected_item,
                     "recommended_items": [item for item in outfit_option["outfit_items"] if item["id"] != selected_item["id"]]
                 }
                 SessionState.set_outfit(outfit_dict)
-                SessionState.navigate_to("suggested_look")
+                SessionState.set_feedback(liked=True)
+                SessionState.navigate_to("feedback")
                 st.rerun()
             
             st.divider()
     
-    # Button to go back to item selection
-    if st.button("Go Back to Item Selection"):
-        SessionState.navigate_to("suggested_items")
-        st.rerun() 
+    # Navigation buttons at the bottom
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        if st.button("Go Back to Item Selection"):
+            SessionState.navigate_to("suggested_items")
+            st.rerun()
+    
+    with col2:
+        if st.button("Add More Context", use_container_width=True):
+            # Create the outfit dictionary using the first outfit option as default
+            if outfit_options:
+                outfit_dict = {
+                    "base_item": selected_item,
+                    "recommended_items": [item for item in outfit_options[0]["outfit_items"] if item["id"] != selected_item["id"]]
+                }
+                SessionState.set_outfit(outfit_dict)
+            else:
+                outfit = SessionState.recommend_outfit(selected_item, clothing_items, outfits)
+                SessionState.set_outfit(outfit)
+            
+            # Navigate to clarify feedback to add more context
+            SessionState.navigate_to("clarify_feedback")
+            st.rerun() 
