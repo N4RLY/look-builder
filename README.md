@@ -4,7 +4,7 @@ This is a project for S25-HAIID course at Innopolis University
 
 ## Description
 
-Look Builder is a fashion styling assistant that helps users create stylish outfits based on their preferences. The application uses similarity matching to recommend clothing items and complete outfits.
+Look Builder is a fashion styling assistant that helps users create stylish outfits based on their preferences. The application uses similarity matching to recommend clothing items and complete outfits, implementing interactive Human-AI Interaction Design patterns.
 
 ## Features
 
@@ -13,12 +13,14 @@ Look Builder is a fashion styling assistant that helps users create stylish outf
 - Receive complete outfit recommendations
 - Provide feedback to improve recommendations
 - Iterative outfit generation based on feedback
+- Admin dashboard for analyzing user feedback
 
 ## Technologies Used
 
 - Streamlit for the user interface
 - Python 3.8+
 - scikit-learn for similarity matching
+- pandas and numpy for data processing
 
 ## Installation
 
@@ -43,14 +45,49 @@ Look Builder is a fashion styling assistant that helps users create stylish outf
    streamlit run main.py
    ```
 3. The application will open in your default web browser
+4. To access the admin dashboard:
+   ```
+   streamlit run admin_dashboard.py
+   ```
 
 ## Project Structure
 
-- `main.py`: Main application file
+- `main.py`: Entry point and main application logic
+- `admin_dashboard.py`: Dashboard for analyzing user feedback
+- `screens/`: Contains modular UI screens
+  - `input_preferences.py`: Screen for users to specify initial preferences
+  - `loading.py` & `outfit_loading.py`: Loading screens
+  - `suggested_items.py`: Shows items matching user preferences 
+  - `suggested_outfits.py`: Displays complete outfit options
+  - `clarify_feedback.py`: Allows users to provide detailed feedback
+  - `final_look.py`: Presents the final recommended outfit
+  - `feedback.py`: Collects user feedback on recommendations
 - `utils/`: 
-  - `session_state.py`: Manages application state and contains recommendation algorithms
+  - `session_state.py`: Manages application state and recommendation algorithms
   - `mock_data.py`: Contains clothing item data
-- `screens/`: Different screens/views of the application
+  - `feedback_analyzer.py`: Processes and analyzes user feedback
+
+## Application Flow
+
+1. User inputs preferences (type, color, material, gender)
+2. System suggests matching items using similarity algorithms
+3. User selects a preferred item
+4. System generates complete outfit options based on the selected item
+5. User provides context or additional feedback if needed
+6. System presents final outfit with explanations for each choice
+7. User provides feedback to improve future recommendations
+
+## Human-AI Interaction Design
+
+The project implements several HAID patterns:
+- User-supervised automation for outfit suggestions
+- Feedback collection mechanisms for continuous improvement
+- Clear explanations for why specific items were selected
+- Adaptive recommendations based on user preferences and context
+
+## Documentation
+
+For more detailed information about the project, including the full approach, future work, and HAID design principles, please see `documentation.md`.
 
 ## Contributing
 

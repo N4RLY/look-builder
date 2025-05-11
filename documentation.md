@@ -12,23 +12,36 @@
 - **Python 3.8+**: The primary programming language for all application logic.
 - **scikit-learn**: Utilized for cosine similarity calculations between item embeddings.
 - **pandas, numpy**: For data manipulation and processing.
+- **matplotlib, seaborn**: For data visualization in the admin dashboard.
 
 ### Frontend
 - **Streamlit**: Provides a rapid, interactive web interface for the application, allowing for quick prototyping and user-friendly design.
 
 ### Project Structure
 - `main.py`: Entry point and main application logic, controlling screen navigation.
-- `screens/`: Contains modular UI screens (input_preferences, suggested_items, loading, suggested_look, etc.).
+- `admin_dashboard.py`: Dashboard for analyzing user feedback and system performance.
+- `screens/`: Contains modular UI screens:
+  - `input_preferences.py`: Screen for users to specify initial preferences.
+  - `suggested_items.py`: Shows items matching user preferences.
+  - `loading.py` & `outfit_loading.py`: Loading screens during processing.
+  - `suggested_outfits.py`: Displays complete outfit options.
+  - `clarify_feedback.py`: Allows users to provide detailed feedback.
+  - `final_look.py`: Presents the final recommended outfit.
+  - `feedback.py`: Collects user feedback on recommendations.
 - `utils/`: 
   - `session_state.py`: Manages application state across screens and contains recommendation logic.
   - `mock_data.py`: Provides clothing item data for the application.
+  - `feedback_analyzer.py`: Processes and analyzes user feedback data.
+- `feedback_data.csv`: Stores user feedback for analysis in the admin dashboard.
 
 ### Dependency Management
 - All dependencies are listed in `requirements.txt`:
-  - streamlit==1.28.0
+  - streamlit==1.45.0
   - pandas==2.0.3
   - numpy==1.24.3
   - scikit-learn==1.2.2
+  - matplotlib==3.7.2
+  - seaborn==0.12.2
 
 ---
 
