@@ -40,8 +40,8 @@ def render():
             st.write("• **Optional jacket:** Lightweight wool blazer in a neutral color (grey or dark blue)")
             
             # Add style and usage context
-            st.write(f"### Look style: {base_item['style']}")
-            st.write(f"### Usage context: {base_item.get('usage_context', 'No specific usage context provided.')}")
+            st.write(f"##### Look style: {base_item['style']}")
+            st.write(f"##### Usage context: {base_item.get('usage_context', 'No specific usage context provided.')}")
         
         # Thank you message
         st.write("Thank you for trusting me with your style!")
