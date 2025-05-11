@@ -149,16 +149,6 @@ class SessionState:
         return co_matrix
 
     @staticmethod
-    def cooccurrence_similarity(vec1: List[int], vec2: List[int]) -> float:
-        """Compute cosine similarity between two co-occurrence vectors."""
-        dot = sum(a * b for a, b in zip(vec1, vec2))
-        norm1 = sum(a * a for a in vec1) ** 0.5
-        norm2 = sum(b * b for b in vec2) ** 0.5
-        if norm1 == 0 or norm2 == 0:
-            return 0.0
-        return dot / (norm1 * norm2)
-
-    @staticmethod
     def recommend_outfit(selected_item: Dict[str, Any], items: List[Dict[str, Any]], outfits: List[list]) -> Dict[str, Any]:
         """Given a selected item, find a compatible outfit using co-occurrence-based similarity. If no co-occurring outfit is found, fallback to feature-based similarity."""
         # Find the outfit that contains the selected item's id
