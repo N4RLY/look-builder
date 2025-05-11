@@ -69,25 +69,20 @@ Look Builder is a fashion styling assistant that helps users create stylish outf
 
 ## Application Flow
 
-1. User inputs preferences (type, color, material, gender)
-2. System suggests matching items using similarity algorithms
-3. User selects a preferred item
-4. System generates complete outfit options based on the selected item
-5. User provides context or additional feedback if needed
-6. System presents final outfit with explanations for each choice
-7. User provides feedback to improve future recommendations
+1. **Input Preferences** (`input_preferences.py`): Users specify clothing preferences (type, color, material, gender).
+2. **Suggested Items** (`suggested_items.py`): The system suggests items matching the preferences using similarity matching.
+3. **Suggested Outfits** (`suggested_outfits.py`): Complete outfit options are generated based on the selected item.
+4. **Suggested Look** (`suggested_look.py`): A complete outfit is presented with item details.
+5. **Clarification Feedback** (`clarify_feedback.py`): Users can provide more detailed feedback if needed.
+6. **Feedback** (`feedback.py`): Users can provide feedback on the suggested outfit.
+7. **Final Look** (`final_look.py`): The final recommended outfit is presented, with explanations for each choice.
 
-## Human-AI Interaction Design
+### Recommendation Engine
+- **Similarity Calculation**: The system uses cosine similarity to find the most similar items to the user's query.
+- **Outfit Generation**: The `recommend_outfit` method assembles a coherent outfit based on the style of a selected base item, matching items from different categories.
+- **Data Structure**: Clothing items are organized in the mock_data.py file with detailed attributes (id, item_type, color, material, style, etc.).
 
-The project implements several HAID patterns:
-- User-supervised automation for outfit suggestions
-- Feedback collection mechanisms for continuous improvement
-- Clear explanations for why specific items were selected
-- Adaptive recommendations based on user preferences and context
-
-## Documentation
-
-For more detailed information about the project, including the full approach, future work, and HAID design principles, please see `documentation.md`.
+### Information on addressing HAIID principles and patterns can be found in the project report
 
 ## Contributing
 
