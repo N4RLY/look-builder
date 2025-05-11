@@ -77,11 +77,6 @@ Look Builder is a fashion styling assistant that helps users create stylish outf
 6. **Feedback** (`feedback.py`): Users can provide feedback on the suggested outfit.
 7. **Final Look** (`final_look.py`): The final recommended outfit is presented, with explanations for each choice.
 
-### Recommendation Engine
-- **Similarity Calculation**: The system uses cosine similarity to find the most similar items to the user's query.
-- **Outfit Generation**: The `recommend_outfit` method assembles a coherent outfit based on the style of a selected base item, matching items from different categories.
-- **Data Structure**: Clothing items are organized in the mock_data.py file with detailed attributes (id, item_type, color, material, style, etc.).
-
 ### Information on addressing HAIID principles and patterns can be found in the project report
 
 ## Contributing
